@@ -20,9 +20,17 @@ var dinaSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    sellername: {
+    component: {
         type: String,
+        required: true,
+        trim: true,
         lowercase: true
+    },
+    seller: {
+        type: String,
+        lowercase: true,
+        trim: true,
+        default: 'DinaHisham'
     }
 });
 

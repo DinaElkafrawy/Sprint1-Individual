@@ -4,14 +4,14 @@ var mongoose = require('mongoose'),
     Dina = mongoose.model('Dina');
 
 module.exports.getDina = function(req, res, next) {
-    if (!Validations.isObjectId(req.params.dinaId)) {
+    if (!Validations.isObjectId(req.params.productId)) {
         return res.status(422).json({
             err: null,
             msg: 'productId parameter must be a valid ObjectId.',
             data: null
         });
     }
-    Dina.findById(req.params.dinaId).exec(function(err, dina) {
+    Dina.findById(req.params.productId).exec(function(err, dina) {
         if (err) {
             return next(err);
         }
@@ -73,7 +73,11 @@ module.exports.createDina = function(req, res, next) {
         req.body.name &&
         Validations.isString(req.body.name) &&
         req.body.price &&
-        Validations.isNumber(req.body.price);
+        Validations.isNumber(req.body.price)
+    req.body.component &&
+    Validations.isString(req.body.component)
+    req.body.seller &&
+    Validations.isString(req.body.seller);
     if (!valid) {
         return res.status(422).json({
             err: null,
@@ -98,7 +102,8 @@ module.exports.createDina = function(req, res, next) {
 };
 
 module.exports.updateDina = function(req, res, next) {
-    if (!Validations.isObjectId(req.params.dinaId)) {
+    console.log(req.params);
+    if (!Validations.isObjectId(req.params.productId)) {
         return res.status(422).json({
             err: null,
             msg: 'productId parameter must be a valid ObjectId.',
@@ -109,7 +114,11 @@ module.exports.updateDina = function(req, res, next) {
         req.body.name &&
         Validations.isString(req.body.name) &&
         req.body.price &&
-        Validations.isNumber(req.body.price);
+        Validations.isNumber(req.body.price)
+    req.body.component &&
+    Validations.isString(req.body.component)
+    req.body.seller &&
+    Validations.isString(req.body.seller);
     if (!valid) {
         return res.status(422).json({
             err: null,
@@ -122,7 +131,7 @@ module.exports.updateDina = function(req, res, next) {
     req.body.updatedAt = moment().toDate();
 
     Dina.findByIdAndUpdate(
-        req.params.dinaId,
+        req.params.productId,
         {
             $set: req.body
         },
@@ -145,14 +154,14 @@ module.exports.updateDina = function(req, res, next) {
 };
 
 module.exports.deleteDina = function(req, res, next) {
-    if (!Validations.isObjectId(req.params.dinaId)) {
+    if (!Validations.isObjectId(req.params.productId)) {
         return res.status(422).json({
             err: null,
             msg: 'productId parameter must be a valid ObjectId.',
             data: null
         });
     }
-    Dina.findByIdAndRemove(req.params.dinaId).exec(function(
+    Dina.findByIdAndRemove(req.params.productId).exec(function(
         err,
         deletedDina
     ) {
