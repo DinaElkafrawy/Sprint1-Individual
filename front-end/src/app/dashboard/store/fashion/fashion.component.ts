@@ -51,12 +51,12 @@ export class FashionComponent implements OnInit {
 
     onCreateCall(event) {
         event.confirm.resolve(event.newData);
-        this.fashionService.createProduct(event.newData.name, event.newData.price).subscribe();
+        this.fashionService.createDina(event.newData.name, event.newData.price).subscribe();
     }
 
     onEditCall(event) {
-        event.confirm.resolve(event.newData);
-        this.fashionService.updateProduct(event.newData.name, event.newData.price).subscribe();
+        event.confirm.resolve(event.newData)
+        this.fashionService.updateDina(event.newData.name, event.newData.price).subscribe();
     }
 
     ngOnInit() {
